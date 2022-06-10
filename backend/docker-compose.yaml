@@ -7,13 +7,13 @@ services:
     # Porta padrão
     ports:
       - '5432:5432'
-    network_mode: bridge # port available on localhost 
+    network_mode: bridge # port available on localhost
     container_name: postgres_docker
 
     environment:
       POSTGRES_USER: 'postgres'
       POSTGRES_PASSWORD: 'postgres'
-      POSTGRES_DB: 'banco-ideias-postgres'
+      POSTGRES_DB: 'database_banco'
 
     volumes:
       - ./initdb:/docker-entrypoint-initdb.d

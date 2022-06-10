@@ -1,11 +1,12 @@
 import { Request, Response } from 'express';
+import { container } from 'tsyringe';
 import { CreateUserService } from '../../services/users/CreateUserService';
 
 class CreateUserController {
   async handle(request: Request, response: Response) {
     const { name, email, password, registry } = request.body;
 
-    const createUserService = new CreateUserService();
+    const createUserService = container.resolve(CreateUserService);
 
     const createUser = await createUserService.execute({
       name,
@@ -14,7 +15,7 @@ class CreateUserController {
       registry,
     });
 
-    return response.status(201).json({ createUser });
+    return response.status(204).json({ createUser });
   }
 }
 
