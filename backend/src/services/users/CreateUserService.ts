@@ -2,6 +2,7 @@ import { CreateUserDTO } from '../dtos/CreateUserDTO';
 import { IUsersRepository } from '../../repositories/IUsersRepository';
 import { inject, injectable } from 'tsyringe';
 import { AppError } from '../../config/errors/AppError';
+import { IBcryptHashProvider } from '../../providers/bcryptHash/IBcryptHashProvider';
 
 const regexEmail = /@fiponline.edu.br$/;
 
@@ -10,6 +11,8 @@ class CreateUserService {
   constructor(
     @inject('UsersRepository')
     private usersRepository: IUsersRepository,
+    @inject('BcryptHashProvider')
+    private bcryptHashProvider: IBcryptHashProvider,
   ) {}
 
   async execute({
@@ -38,10 +41,12 @@ class CreateUserService {
       throw new AppError('Error: Email inválido');
     }
 
+    const hashPassword = await this.bcryptHashProvider.generateHash(password);
+
     const user = await this.usersRepository.create({
       name,
       email,
-      password,
+      password: hashPassword,
       registry,
     });
 
