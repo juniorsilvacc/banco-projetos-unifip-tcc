@@ -38,7 +38,7 @@ class CreateUserService {
     const validEmail = regexEmail.test(email);
 
     if (!validEmail) {
-      throw new AppError('Error: Email inválido');
+      throw new AppError('Email inválido');
     }
 
     const hashPassword = await this.bcryptHashProvider.generateHash(password);
