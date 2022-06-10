@@ -3,7 +3,7 @@ import { container } from 'tsyringe';
 import { CreateUserService } from '../../services/users/CreateUserService';
 
 class CreateUserController {
-  async handle(request: Request, response: Response) {
+  async handle(request: Request, response: Response): Promise<Response> {
     const { name, email, password, registry } = request.body;
 
     const createUserService = container.resolve(CreateUserService);
