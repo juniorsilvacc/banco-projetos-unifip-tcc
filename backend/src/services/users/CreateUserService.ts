@@ -1,9 +1,10 @@
-import { CreateUserDTO } from '../dtos/CreateUserDTO';
-import { IUsersRepository } from '../../repositories/IUsersRepository';
 import { inject, injectable } from 'tsyringe';
 import { AppError } from '../../config/errors/AppError';
-import { IBcryptHashProvider } from '../../providers/bcryptHash/IBcryptHashProvider';
+import { CreateUserDTO } from '../../dtos/CreateUserDTO';
+import { IBcryptHashProvider } from '../../providers/bcrypt/IBcryptHashProvider';
+import { IUsersRepository } from '../../repositories/users/IUsersRepository';
 
+// Regex
 const regexEmail = /@fiponline.edu.br$/;
 
 @injectable()
@@ -21,18 +22,16 @@ class CreateUserService {
     password,
     registry,
   }: CreateUserDTO): Promise<void> {
-    const userAlreadyExists = await this.usersRepository.findEmail(email);
+    const user = await this.usersRepository.findByEmail(email);
 
-    if (userAlreadyExists) {
-      throw new AppError('Usuário existente');
+    if (user) {
+      throw new AppError('O usuário já existe');
     }
 
-    const registryAlreadyExists = await this.usersRepository.findRegistry(
-      registry,
-    );
+    const registryExists = await this.usersRepository.findByRegistry(registry);
 
-    if (registryAlreadyExists) {
-      throw new AppError('Matrícula existente');
+    if (registryExists) {
+      throw new AppError('A matrícula já existe');
     }
 
     const validEmail = regexEmail.test(email);
@@ -43,14 +42,12 @@ class CreateUserService {
 
     const hashPassword = await this.bcryptHashProvider.generateHash(password);
 
-    const user = await this.usersRepository.create({
+    await this.usersRepository.create({
       name,
       email,
       password: hashPassword,
       registry,
     });
-
-    return user;
   }
 }
 

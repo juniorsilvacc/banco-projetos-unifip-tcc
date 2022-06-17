@@ -8,14 +8,14 @@ class CreateUserController {
 
     const createUserService = container.resolve(CreateUserService);
 
-    const createUser = await createUserService.execute({
+    await createUserService.execute({
       name,
       email,
       password,
       registry,
     });
 
-    return response.status(204).json({ createUser });
+    return response.status(204).json();
   }
 }
 

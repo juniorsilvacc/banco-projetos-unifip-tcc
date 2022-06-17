@@ -1,4 +1,4 @@
-import { compare, hash } from 'bcryptjs';
+import { compare, hash } from 'bcrypt';
 import { IBcryptHashProvider } from '../IBcryptHashProvider';
 
 class BcryptHashProvider implements IBcryptHashProvider {
