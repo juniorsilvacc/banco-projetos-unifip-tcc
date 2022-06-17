@@ -1,5 +1,6 @@
 import { Request, Response } from 'express';
 import { container } from 'tsyringe';
+import { instanceToInstance } from 'class-transformer';
 import { DetailsUserService } from '../../services/users/DetailsUserService';
 
 class DetailsUserController {
@@ -10,7 +11,7 @@ class DetailsUserController {
 
     const user = await detailsUserService.execute({ user_id });
 
-    return response.status(200).json(user);
+    return response.status(200).json(instanceToInstance(user));
   }
 }
 

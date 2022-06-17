@@ -1,6 +1,7 @@
 import { Request, Response } from 'express';
 import { container } from 'tsyringe';
 import { AppError } from '../../config/errors/AppError';
+import { instanceToInstance } from 'class-transformer';
 import { UpdateUserService } from '../../services/users/UpdateUserService';
 
 class UpdateUserController {
@@ -15,7 +16,7 @@ class UpdateUserController {
     } else {
       const { filename: image } = request.file;
 
-      await updateUserService.execute({
+      const update = await updateUserService.execute({
         user_id,
         name,
         email,
@@ -25,7 +26,7 @@ class UpdateUserController {
         image,
       });
 
-      return response.status(200).json();
+      return response.status(200).json(instanceToInstance(update));
     }
   }
 }
