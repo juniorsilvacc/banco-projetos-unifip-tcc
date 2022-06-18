@@ -7,6 +7,7 @@ interface IUsersRepository {
   findByRegistry(registry: string): Promise<User | null>;
   findById(id: string): Promise<User | null>;
   save(user: User): Promise<User>;
+  createAdmin(data: CreateUserDTO): Promise<void>;
 }
 
 export { IUsersRepository };
