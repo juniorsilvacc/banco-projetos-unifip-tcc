@@ -15,7 +15,7 @@ class CreateUserController {
       registry,
     });
 
-    return response.status(204).json();
+    return response.status(201).json();
   }
 }
 
