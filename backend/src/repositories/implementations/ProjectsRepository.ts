@@ -11,6 +11,17 @@ class ProjectsRepository implements IProjectsRepository {
     this.repository = dataSource.getRepository(Project);
   }
 
+  async findUserProject(user_id: string): Promise<Project[]> {
+    const projects = await this.repository.find({
+      where: { user_id },
+      order: {
+        created_at: 'DESC',
+      },
+    });
+
+    return projects;
+  }
+
   async listAll(): Promise<Project[]> {
     const projects = await this.repository.find({
       order: {
