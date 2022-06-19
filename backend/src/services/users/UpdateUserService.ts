@@ -3,7 +3,7 @@ import fs from 'fs';
 import { inject, injectable } from 'tsyringe';
 import { AppError } from '../../config/errors/AppError';
 import { User } from '../../models/User';
-import { IUsersRepository } from '../../repositories/users/IUsersRepository';
+import { IUsersRepository } from '../../repositories/IUsersRepository';
 import upload from '../../config/upload';
 import { IBcryptHashProvider } from '../../providers/bcrypt/IBcryptHashProvider';
 
@@ -76,7 +76,7 @@ class UpdateUserService {
       user.password = await this.bcryptHashProvider.generateHash(password);
     }
 
-    return this.usersRepository.save(user);
+    return await this.usersRepository.save(user);
   }
 }
 

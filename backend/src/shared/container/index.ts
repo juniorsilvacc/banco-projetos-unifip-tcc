@@ -1,9 +1,12 @@
 import { container } from 'tsyringe';
-import { UsersRepository } from '../../repositories/users/implementations/UsersRepository';
-import { IUsersRepository } from '../../repositories/users/IUsersRepository';
+
 import '../../providers';
-import { ICategoriesRepository } from '../../repositories/category/ICategoriesRepository';
-import { CategoriesRepository } from '../../repositories/category/implementations/CategoriesRepository';
+import { ICategoriesRepository } from '../../repositories/ICategoriesRepository';
+import { CategoriesRepository } from '../../repositories/implementations/CategoriesRepository';
+import { ProjectsRepository } from '../../repositories/implementations/ProjectsRepository';
+import { UsersRepository } from '../../repositories/implementations/UsersRepository';
+import { IProjectsRepository } from '../../repositories/IProjectsRepository';
+import { IUsersRepository } from '../../repositories/IUsersRepository';
 
 container.registerSingleton<IUsersRepository>(
   'UsersRepository',
@@ -13,4 +16,9 @@ container.registerSingleton<IUsersRepository>(
 container.registerSingleton<ICategoriesRepository>(
   'CategoriesRepository',
   CategoriesRepository,
+);
+
+container.registerSingleton<IProjectsRepository>(
+  'ProjectsRepository',
+  ProjectsRepository,
 );

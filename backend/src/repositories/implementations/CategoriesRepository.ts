@@ -1,8 +1,8 @@
 import { Repository } from 'typeorm';
-import { dataSource } from '../../../shared/connection/typeorm';
-import { Category } from '../../../models/Category';
+import { ICreateCategoryDTO } from '../../dtos/ICreateCategoryDTO';
+import { Category } from '../../models/Category';
+import { dataSource } from '../../shared/connection/typeorm';
 import { ICategoriesRepository } from '../ICategoriesRepository';
-import { CreateCategoryDTO } from '../../../dtos/CreateCategoryDTO';
 
 class CategoriesRepository implements ICategoriesRepository {
   private repository: Repository<Category>;
@@ -23,7 +23,7 @@ class CategoriesRepository implements ICategoriesRepository {
     return category;
   }
 
-  async create({ name, description }: CreateCategoryDTO): Promise<void> {
+  async create({ name, description }: ICreateCategoryDTO): Promise<void> {
     const createCategory = this.repository.create({
       name,
       description,

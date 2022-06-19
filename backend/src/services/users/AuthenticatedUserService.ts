@@ -1,7 +1,7 @@
 import { inject, injectable } from 'tsyringe';
 import { AppError } from '../../config/errors/AppError';
 import { IBcryptHashProvider } from '../../providers/bcrypt/IBcryptHashProvider';
-import { IUsersRepository } from '../../repositories/users/IUsersRepository';
+import { IUsersRepository } from '../../repositories/IUsersRepository';
 import { sign } from 'jsonwebtoken';
 import authConfig from '../../config/auth';
 

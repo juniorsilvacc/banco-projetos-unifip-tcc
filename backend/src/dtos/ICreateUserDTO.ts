@@ -1,4 +1,4 @@
-interface CreateUserDTO {
+interface ICreateUserDTO {
   id?: string;
   name: string;
   email: string;
@@ -8,4 +8,4 @@ interface CreateUserDTO {
   isAdmin?: boolean;
 }
 
-export { CreateUserDTO };
+export { ICreateUserDTO };

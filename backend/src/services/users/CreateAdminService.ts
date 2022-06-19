@@ -1,8 +1,8 @@
 import { inject, injectable } from 'tsyringe';
 import { AppError } from '../../config/errors/AppError';
-import { CreateUserDTO } from '../../dtos/CreateUserDTO';
+import { ICreateUserDTO } from '../../dtos/ICreateUserDTO';
 import { IBcryptHashProvider } from '../../providers/bcrypt/IBcryptHashProvider';
-import { IUsersRepository } from '../../repositories/users/IUsersRepository';
+import { IUsersRepository } from '../../repositories/IUsersRepository';
 
 // Regex
 const regexEmail = /@fiponline.edu.br$/;
@@ -21,7 +21,7 @@ class CreateAdminService {
     email,
     password,
     registry,
-  }: CreateUserDTO): Promise<void> {
+  }: ICreateUserDTO): Promise<void> {
     const user = await this.usersRepository.findByEmail(email);
 
     if (user) {

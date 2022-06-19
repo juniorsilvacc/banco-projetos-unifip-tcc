@@ -1,7 +1,8 @@
 import { Repository } from 'typeorm';
-import { dataSource } from '../../../shared/connection/typeorm';
-import { CreateUserDTO } from '../../../dtos/CreateUserDTO';
-import { User } from '../../../models/User';
+import { ICreateUserDTO } from '../../dtos/ICreateUserDTO';
+import { User } from '../../models/User';
+import { dataSource } from '../../shared/connection/typeorm';
+
 import { IUsersRepository } from '../IUsersRepository';
 
 class UsersRepository implements IUsersRepository {
@@ -16,7 +17,7 @@ class UsersRepository implements IUsersRepository {
     email,
     password,
     registry,
-  }: CreateUserDTO): Promise<void> {
+  }: ICreateUserDTO): Promise<void> {
     const createAdmin = this.repository.create({
       name,
       email,
@@ -55,7 +56,7 @@ class UsersRepository implements IUsersRepository {
     email,
     password,
     registry,
-  }: CreateUserDTO): Promise<void> {
+  }: ICreateUserDTO): Promise<void> {
     const createUser = this.repository.create({
       name,
       email,

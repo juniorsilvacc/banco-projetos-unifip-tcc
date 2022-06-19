@@ -1,7 +1,7 @@
 import { inject, injectable } from 'tsyringe';
 import { AppError } from '../../config/errors/AppError';
-import { CreateCategoryDTO } from '../../dtos/CreateCategoryDTO';
-import { ICategoriesRepository } from '../../repositories/category/ICategoriesRepository';
+import { ICreateCategoryDTO } from '../../dtos/ICreateCategoryDTO';
+import { ICategoriesRepository } from '../../repositories/ICategoriesRepository';
 
 @injectable()
 class CreateCategoryService {
@@ -10,7 +10,7 @@ class CreateCategoryService {
     private categoriesRepository: ICategoriesRepository,
   ) {}
 
-  async execute({ name, description }: CreateCategoryDTO): Promise<void> {
+  async execute({ name, description }: ICreateCategoryDTO): Promise<void> {
     const category = await this.categoriesRepository.findByName(name);
 
     if (category) {

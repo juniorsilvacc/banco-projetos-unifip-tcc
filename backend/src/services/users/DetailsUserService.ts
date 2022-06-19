@@ -1,7 +1,7 @@
 import { inject, injectable } from 'tsyringe';
 import { AppError } from '../../config/errors/AppError';
 import { User } from '../../models/User';
-import { IUsersRepository } from '../../repositories/users/IUsersRepository';
+import { IUsersRepository } from '../../repositories/IUsersRepository';
 
 interface IRequest {
   user_id: string;

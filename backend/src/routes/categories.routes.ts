@@ -15,6 +15,11 @@ categoriesRouter.post(
   ensureAdmin,
   createCategoryController.handle,
 );
-categoriesRouter.get('/list', ensureAdmin, listAllCategoriesController.handle);
+categoriesRouter.get(
+  '/list',
+  ensureAuthenticated,
+  ensureAdmin,
+  listAllCategoriesController.handle,
+);
 
 export { categoriesRouter };
