@@ -7,6 +7,7 @@ interface IProjectsRepository {
   findByTitle(title: string): Promise<Project | null>;
   findById(id: string): Promise<Project | null>;
   save(project: Project): Promise<Project>;
+  listAll(): Promise<Project[]>;
 }
 
 export { IProjectsRepository };
