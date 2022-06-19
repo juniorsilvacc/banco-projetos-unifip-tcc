@@ -4,8 +4,8 @@ import { Project } from '../../models/Project';
 import { IProjectsRepository } from '../../repositories/IProjectsRepository';
 
 enum Availabilities {
-  Aprovado = 'Aprovado',
-  Reprovado = 'Recusado',
+  Permitido = 'Permitido',
+  Recusado = 'Recusado',
 }
 
 interface IRequest {

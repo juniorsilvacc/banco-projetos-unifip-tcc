@@ -9,6 +9,7 @@ interface IProjectsRepository {
   save(project: Project): Promise<Project>;
   listAll(): Promise<Project[]>;
   findUserProject(user_id: string): Promise<Project[]>;
+  findCategoryProject(category_id: string): Promise<Project[]>;
 }
 
 export { IProjectsRepository };
