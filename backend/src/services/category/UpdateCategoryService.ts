@@ -20,7 +20,7 @@ class UpdateCategoryService {
     const category = await this.categoriesRepository.findById(id);
 
     if (!category) {
-      throw new AppError('Categoria não encontrado', 404);
+      throw new AppError('Categoria não encontrada', 404);
     }
 
     const categoryWithUpdatedEmail = await this.categoriesRepository.findByName(

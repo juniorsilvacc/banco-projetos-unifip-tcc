@@ -11,6 +11,10 @@ class CategoriesRepository implements ICategoriesRepository {
     this.repository = dataSource.getRepository(Category);
   }
 
+  async remove(id: string): Promise<void> {
+    await this.repository.delete(id);
+  }
+
   async save(category: Category): Promise<Category> {
     return this.repository.save(category);
   }
