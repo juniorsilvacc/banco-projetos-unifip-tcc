@@ -11,6 +11,16 @@ class CategoriesRepository implements ICategoriesRepository {
     this.repository = dataSource.getRepository(Category);
   }
 
+  async save(category: Category): Promise<Category> {
+    return this.repository.save(category);
+  }
+
+  async findById(id: string): Promise<Category | null> {
+    const category = await this.repository.findOneBy({ id });
+
+    return category;
+  }
+
   async listAll(): Promise<Category[]> {
     const categories = await this.repository.find();
 

@@ -5,7 +5,6 @@ import { ListProjectsCategoryService } from '../../services/project/ListProjects
 class ListProjectsCategoryController {
   async handle(request: Request, response: Response): Promise<Response> {
     const category_id = request.query.category_id as string;
-    // const { id } = request.params;
 
     const listProjectsCategoryService = container.resolve(
       ListProjectsCategoryService,
@@ -13,7 +12,6 @@ class ListProjectsCategoryController {
 
     const projects = await listProjectsCategoryService.execute({
       category_id,
-      // category_id: id,
     });
 
     return response.status(200).json(projects);
