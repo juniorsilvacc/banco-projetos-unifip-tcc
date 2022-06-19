@@ -3,6 +3,7 @@ import { CreateProjectController } from '../controllers/projects/CreateProjectCo
 import { ListAllProjectsController } from '../controllers/projects/ListAllProjectsController';
 import { ListProjectsCategoryController } from '../controllers/projects/ListProjectsCategoryController';
 import { ListProjectsUserController } from '../controllers/projects/ListProjectsUserController';
+import { ShowProjectController } from '../controllers/projects/ShowProjectController';
 import ensureAuthenticated from '../shared/middlewares/ensureAuthenticated';
 
 const projectsRouter = Router();
@@ -11,6 +12,7 @@ const createProjectController = new CreateProjectController();
 const listAllProjectsController = new ListAllProjectsController();
 const listProjectsCategoryController = new ListProjectsCategoryController();
 const listProjectsUserController = new ListProjectsUserController();
+const showProjectController = new ShowProjectController();
 
 projectsRouter.post(
   '/create',
@@ -27,5 +29,7 @@ projectsRouter.get(
   ensureAuthenticated,
   listProjectsUserController.handle,
 );
+
+projectsRouter.get('/:id', showProjectController.handle);
 
 export { projectsRouter };
