@@ -2,6 +2,7 @@ import { inject, injectable } from 'tsyringe';
 import { AppError } from '../../../config/errors/AppError';
 import { IBcryptHashProvider } from '../../../shared/providers/bcrypt/IBcryptHashProvider';
 import { ICreateUserDTO } from '../dtos/ICreateUserDTO';
+import { ISendMailRepository } from '../repositories/ISendMailRepository';
 import { IUsersRepository } from '../repositories/IUsersRepository';
 
 // Regex
@@ -14,6 +15,8 @@ class CreateUserService {
     private usersRepository: IUsersRepository,
     @inject('BcryptHashProvider')
     private bcryptHashProvider: IBcryptHashProvider,
+    @inject('SendMailRepository')
+    private sendMailRepository: ISendMailRepository,
   ) {}
 
   async execute({
@@ -47,6 +50,17 @@ class CreateUserService {
       email,
       password: hashPassword,
       registry,
+    });
+
+    await this.sendMailRepository.sendMail({
+      user_email: email,
+      subject: 'Cadastro concluído',
+      body: [
+        `<div style="text-align: center">`,
+        `<h1>FeedBack</h1>`,
+        `<p>Olá ${name}, Sua conta foi criada com sucesso. Obrigado!</p>`,
+        `</div>`,
+      ].join(''),
     });
   }
 }
