@@ -1,7 +1,7 @@
 import 'reflect-metadata';
 import 'dotenv/config';
 import app from './app';
-import { dataSource } from './shared/connection/typeorm';
+import { dataSource } from './shared/infra/connection/typeorm';
 
 dataSource.initialize().then(() => {
   app.listen(3333, () => {
