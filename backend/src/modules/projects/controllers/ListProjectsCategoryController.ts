@@ -1,3 +1,4 @@
+import { instanceToInstance } from 'class-transformer';
 import { Request, Response } from 'express';
 import { container } from 'tsyringe';
 import { ListProjectsCategoryService } from '../services/ListProjectsCategoryService';
@@ -14,7 +15,7 @@ class ListProjectsCategoryController {
       category_id,
     });
 
-    return response.status(200).json(projects);
+    return response.status(200).json(instanceToInstance(projects));
   }
 }
 

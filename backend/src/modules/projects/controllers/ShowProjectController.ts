@@ -1,3 +1,4 @@
+import { instanceToInstance } from 'class-transformer';
 import { Request, Response } from 'express';
 import { container } from 'tsyringe';
 import { ShowProjectService } from '../services/ShowProjectService';
@@ -10,7 +11,7 @@ class ShowProjectController {
 
     const project = await showProjectService.execute({ id });
 
-    return response.status(200).json(project);
+    return response.status(200).json(instanceToInstance(project));
   }
 }
 

@@ -4,13 +4,22 @@ import {
   CreateDateColumn,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
+  ManyToOne,
+  JoinColumn,
+  OneToOne,
 } from 'typeorm';
 import { v4 as uuidV4 } from 'uuid';
+import { Category } from '../../category/models/Category';
+import { User } from '../../users/models/User';
 
 @Entity('projects')
 class Project {
   @PrimaryGeneratedColumn('uuid')
   id: string;
+
+  @ManyToOne(() => User, user => user.project)
+  @JoinColumn({ name: 'user_id' })
+  user: User;
 
   @Column()
   user_id: string;
@@ -23,6 +32,10 @@ class Project {
 
   @Column()
   availability: string;
+
+  @OneToOne(() => Category, category => category.category)
+  @JoinColumn({ name: 'category_id' })
+  category: Category;
 
   @Column()
   category_id: string;

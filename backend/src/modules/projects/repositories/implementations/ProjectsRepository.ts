@@ -18,6 +18,7 @@ class ProjectsRepository implements IProjectsRepository {
       order: {
         created_at: 'DESC',
       },
+      relations: ['user', 'category'],
     });
 
     return projects;
@@ -29,6 +30,7 @@ class ProjectsRepository implements IProjectsRepository {
       order: {
         created_at: 'DESC',
       },
+      relations: ['user', 'category'],
     });
 
     return projects;
@@ -39,13 +41,17 @@ class ProjectsRepository implements IProjectsRepository {
       order: {
         created_at: 'DESC',
       },
+      relations: ['user', 'category'],
     });
 
     return projects;
   }
 
   async findById(id: string): Promise<Project | null> {
-    const projects = await this.repository.findOneBy({ id });
+    const projects = await this.repository.findOne({
+      where: { id },
+      relations: ['user', 'category'],
+    });
 
     return projects;
   }

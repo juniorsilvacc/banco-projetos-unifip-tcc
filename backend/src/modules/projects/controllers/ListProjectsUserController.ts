@@ -1,3 +1,4 @@
+import { instanceToInstance } from 'class-transformer';
 import { Request, Response } from 'express';
 import { container } from 'tsyringe';
 import { ListProjectsUserService } from '../services/ListProjectsUserService';
@@ -10,7 +11,7 @@ class ListProjectsUserController {
 
     const projects = await listProjectsUserService.execute({ user_id });
 
-    return response.status(200).json(projects);
+    return response.status(200).json(instanceToInstance(projects));
   }
 }
 

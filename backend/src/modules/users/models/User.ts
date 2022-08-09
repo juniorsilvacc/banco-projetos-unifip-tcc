@@ -4,14 +4,19 @@ import {
   CreateDateColumn,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
+  OneToMany,
 } from 'typeorm';
 import { v4 as uuidV4 } from 'uuid';
 import { Exclude } from 'class-transformer';
+import { Project } from '../../projects/models/Project';
 
 @Entity('users')
 class User {
   @PrimaryGeneratedColumn('uuid')
   id: string;
+
+  @OneToMany(() => Project, project => project.user)
+  project: Project[];
 
   @Column()
   name: string;

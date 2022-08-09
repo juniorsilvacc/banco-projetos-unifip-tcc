@@ -20,7 +20,7 @@ projectsRouter.post(
   createProjectController.handle,
 );
 
-projectsRouter.get('/', listAllProjectsController.handle);
+projectsRouter.get('/feed', listAllProjectsController.handle);
 
 projectsRouter.get('/category', listProjectsCategoryController.handle);
 
