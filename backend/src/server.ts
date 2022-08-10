@@ -1,11 +1,10 @@
+import 'reflect-metadata';
 import 'dotenv/config';
-import express from 'express';
+import app from './app';
+import { dataSource } from './shared/infra/connection/typeorm';
 
-const app = express();
-
-app.use(express.json());
-
-const port = process.env.PORT;
-app.listen(port, () => {
-  console.log(`Server listening on ${port}`);
+dataSource.initialize().then(() => {
+  app.listen(3333, () => {
+    return console.log('Server started on port 3333! 🏆');
+  });
 });
